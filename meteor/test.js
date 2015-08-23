@@ -1,4 +1,5 @@
 'use strict';
 
-Tinytest.add('mithril.js', function (test) {
+Tinytest.add('mithril', function (test) {
+    
 });

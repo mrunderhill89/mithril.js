@@ -3,24 +3,25 @@
 
 var packageName = 'mrunderhill89:mithril';  // https://atmospherejs.com/hammer/hammer
 var where = 'client';  // where to install: 'client' or 'server'. For both, pass nothing.
-
-var packageJson = JSON.parse(Npm.require("fs").readFileSync('package.json'));
+var fs = Npm.require("fs");
+var path = Npm.require("path");
+var basepath = path.resolve("./packages/mithril-meteor/");
+var packageJson = JSON.parse(fs.readFileSync(path.resolve(basepath, 'package.json')));
 
 Package.describe({
   name: packageName,
-  summary: 'Ports the Mithril.js templating library to Meteor, along with some helpful bridge functions suggested by the author.\n Official library can be found here: https://github.com/lhorie/mithril.js',
+  summary: '(Unofficial) Ports the Mithril.js MVC framework to Meteor.',
   version: packageJson.version,
   git: 'https://github.com/mrunderhill89/mithril.js'
 });
 
 Package.onUse(function (api) {
   api.versionsFrom(['METEOR@0.9.0', 'METEOR@1.0']);
-  api.export('m');
-  api.addFiles([
-    'mithril.js',
-    'meteor/export.js'
-  ], where
-  );
+  api.export('m', 'client');
+  api.addFiles("mithril.js");
+    if (typeof(m) !== "undefined") console.log(m);
+  api.addFiles("meteor/export.js");
+    if (typeof(m) !== "undefined") console.log(m);
 });
 
 Package.onTest(function (api) {
