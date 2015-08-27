@@ -17,11 +17,9 @@ Package.describe({
 
 Package.onUse(function (api) {
   api.versionsFrom(['METEOR@0.9.0', 'METEOR@1.0']);
-  api.export('m', 'client');
+  api.export('m');
   api.addFiles("mithril.js");
-    if (typeof(m) !== "undefined") console.log(m);
   api.addFiles("meteor/export.js");
-    if (typeof(m) !== "undefined") console.log(m);
 });
 
 Package.onTest(function (api) {

@@ -1,4 +1,4 @@
-m = (function app(window, undefined) {
+var m = (function app(window, undefined) {
 	var OBJECT = "[object Object]", ARRAY = "[object Array]", STRING = "[object String]", FUNCTION = "function";
 	var type = {}.toString;
 	var parser = /(?:(^|#|\.)([^#\.\[\]]+))|(\[.+?\])/g, attrParser = /\[(.+?)(?:=("|'|)(.*?)\2)?\]/;
@@ -1154,5 +1154,10 @@ m = (function app(window, undefined) {
 
 	return m
 })(typeof window != "undefined" ? window : {});
-if (typeof module != "undefined" && module !== null && module.exports) module.exports = m;
+if (typeof Package != "undefined"){
+    //Meteor wants us to export to a global.
+    //We'l use a temporary global and move it back over to "m"
+    //in export.js
+    mithril = m;
+} if (typeof module != "undefined" && module !== null && module.exports) module.exports = m;
 else if (typeof define === "function" && define.amd) define(function() {return m});
